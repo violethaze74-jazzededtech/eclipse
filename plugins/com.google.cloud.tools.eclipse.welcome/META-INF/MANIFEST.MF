@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: Cloud Tools for Eclipse Welcome Page Contribution
+Bundle-SymbolicName: com.google.cloud.tools.eclipse.welcome;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Google Inc.
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.core.runtime,
+ org.eclipse.mylyn.tasks.core,
+ org.eclipse.mylyn.tasks.core.data,
+ org.eclipse.mylyn.tasks.core.sync,
+ org.eclipse.mylyn.internal.github.core.issue
