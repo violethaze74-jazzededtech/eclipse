@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.google.cloud.tools.eclipse.preferences.areas">
+      <area
+            host="com.google.cloud.tools.eclipse.preferences.main"
+            title="%page.name"
+            class="com.google.cloud.tools.eclipse.sdk.ui.preferences.CloudSdkPreferenceArea"
+            preferences="instance://com.google.cloud.tools.eclipse.sdk">
+      </area>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.google.cloud.tools.eclipse.sdk.ui.ManagedCloudSdkStartup">
+      </startup>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="com.google.cloud.tools.eclipse.ui.commands"
+            defaultHandler="com.google.cloud.tools.eclipse.sdk.ui.UpdateManagedCloudSdkHandler"
+            id="com.google.cloud.tools.eclipse.sdk.ui.updateManagedCloudSdk"
+            name="%update.managed.sdk">
+      </command>
+   </extension>
+</plugin>
