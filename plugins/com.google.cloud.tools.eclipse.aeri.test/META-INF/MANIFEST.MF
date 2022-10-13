@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AERI Reporting Tests
+Bundle-SymbolicName: com.google.cloud.tools.eclipse.aeri.test
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Google, Inc.
+Fragment-Host: com.google.cloud.tools.eclipse.aeri;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.junit
+Import-Package: org.mockito;provider=google;version="1.10.19",
+ org.mockito.runners;provider=google;version="1.10.19",
+ org.mockito.stubbing;provider=google;version="1.10.19"

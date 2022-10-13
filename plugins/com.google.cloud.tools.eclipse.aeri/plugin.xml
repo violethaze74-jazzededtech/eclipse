@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.epp.logging.aeri.ide.servers">
+      <server
+            class="com.google.cloud.tools.eclipse.aeri.GoogleFeedbackServerConnection"
+            description="Help improve Google’s products by sending feedback straight to Google.  You can view your feedback on the &lt;a href=&quot;http://www.google.com/tools/feedback/reports?hl=en&quot;&gt;My Reports page&lt;/a&gt;."
+            icon16="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/gcp-16x16.png"
+            icon32="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/gcp-32x32.png"
+            id="com.google.cloud.tools.feedback"
+            name="Google Feedback">
+         <link
+               href="https://www.google.com"
+               rel="provider"
+               title="Google Inc.">
+         </link>
+         <link
+               href="https://www.google.com/intl/en/policies/privacy/"
+               rel="privacy-policy"
+               title="Privacy Policy">
+         </link>
+         <link
+               href="https://www.google.com/intl/en/policies/terms/"
+               rel="terms-of-use"
+               title="Terms of Use">
+         </link>
+         <link
+               href="http://www.google.com/tools/feedback/reports?hl=en"
+               rel="help"
+               title="Help">
+         </link>
+      </server>
+   </extension>
+
+</plugin>
