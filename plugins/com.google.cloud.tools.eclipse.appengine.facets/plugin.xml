@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <!-- begin App Engine standard facet -->
+   <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <project-facet id="com.google.cloud.tools.eclipse.appengine.facets.standard">
+       <label>%standardFacetName</label>
+       <description>%standardFacetDescription</description>
+       <version-comparator
+             class="com.google.cloud.tools.eclipse.appengine.facets.StringVersionComparator">
+       </version-comparator>
+    </project-facet>
+    <project-facet-version facet="com.google.cloud.tools.eclipse.appengine.facets.standard" version="JRE7">
+       <constraint>
+          <and>
+             <requires
+                   facet="java"
+                   version="1.7">
+             </requires>
+             <requires
+                   facet="jst.web"
+                   version="2.5">
+             </requires>
+          </and>
+        </constraint>
+    </project-facet-version>
+  </extension>
+
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.presets">
+     <static-preset
+           id="com.google.cloud.tools.eclipse.appengine.standard.jre7.preset">
+        <label>%appengine.standard.jre7.preset</label>
+        <facet
+              id="com.google.cloud.tools.eclipse.appengine.facets.standard"
+              version="JRE7">
+        </facet>
+        <facet
+              id="java"
+              version="1.7">
+        </facet>
+        <facet
+              id="jst.web"
+              version="2.5">
+        </facet>
+     </static-preset>
+  </extension>
+
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.aliases">
+     <!--
+	   CT4E had been deployed with a single version of the App Engine Standard facet, 
+	   which was subsequently replaced with two facet versions with different IDs. 
+     -->
+     <facet-version-alias
+           facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+           version="JRE7"
+           alias="1" />
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.standard.install.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+      type="INSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.StandardFacetInstallDelegate"/>
+    </action>
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.standard.uninstall.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+      type="UNINSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.StandardFacetUninstallDelegate"/>
+    </action>
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.standard.version.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+      type="VERSION_CHANGE">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.StandardFacetVersionChangeDelegate"/>
+    </action>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
+    <supported>
+      <runtime-component any="true" />
+      <facet id="com.google.cloud.tools.eclipse.appengine.facets.standard" />
+    </supported>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.listeners">
+    <listener
+      class="com.google.cloud.tools.eclipse.appengine.facets.AppEngineStandardRuntimeChangeListener"
+      eventTypes="PRIMARY_RUNTIME_CHANGED">
+    </listener>
+  </extension>
+
+  <extension point="org.eclipse.ui.commands">
+    <command
+      description="%convertToAppEngineStandardCommandDescription"
+      id="com.google.cloud.tools.eclipse.appengine.facets.convertToStandard"
+      name="%convertToAppEngineStandardCommandName">
+    </command>
+  </extension>
+
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution
+      allPopups="false"
+      locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+      <command
+        commandId="com.google.cloud.tools.eclipse.appengine.facets.convertToStandard">
+        <visibleWhen checkEnabled="true" />
+      </command>
+    </menuContribution>
+  </extension>
+
+  <extension point="org.eclipse.ui.handlers">
+    <handler
+      class="com.google.cloud.tools.eclipse.appengine.facets.ui.AppEngineStandardProjectConvertCommandHandler"
+      commandId="com.google.cloud.tools.eclipse.appengine.facets.convertToStandard">
+      <enabledWhen>
+        <and>
+          <count value="1" />  <!-- enabled when exactly one project is selected -->
+          <iterate>
+            <adapt type="org.eclipse.core.resources.IProject">
+              <not>
+                <!-- GPE projects handled in .appengine.compat -->
+                <test property="org.eclipse.core.resources.projectNature"
+                   value="com.google.appengine.eclipse.core.gaeNature" />
+              </not>
+            </adapt>
+          </iterate>
+          <not>
+            <iterate>
+              <reference definitionId="com.google.cloud.tools.eclipse.appengine.isStandardProject" />
+            </iterate>
+          </not>
+        </and>
+      </enabledWhen>
+    </handler>
+  </extension>
+
+  <extension point="org.eclipse.core.expressions.definitions">
+    <definition id="com.google.cloud.tools.eclipse.appengine.isStandardProject">
+      <adapt type="org.eclipse.core.resources.IProject">
+        <test
+            property="org.eclipse.wst.common.project.facet.core.projectFacet"
+            value="com.google.cloud.tools.eclipse.appengine.facets.standard" />
+      </adapt>
+    </definition>
+  </extension>
+  <!-- end App Engine standard facet -->
+
+  <!-- begin App Engine flex WAR facet -->
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <project-facet id="com.google.cloud.tools.eclipse.appengine.facets.flex">
+      <label>%flexWarFacetName</label>
+      <description>%flexWarFacetDescription</description>
+    </project-facet>
+    <project-facet-version facet="com.google.cloud.tools.eclipse.appengine.facets.flex" version="1">
+      <constraint>
+        <and>
+          <conflicts facet="com.google.cloud.tools.eclipse.appengine.facets.standard"/>
+          <conflicts facet="com.google.cloud.tools.eclipse.appengine.facets.flex.jar"/>
+          <requires facet="jst.web"
+                    version="2.5,3.0,3.1">
+          </requires>
+          <requires facet="java"
+                    version="1.7,1.8">
+          </requires>
+        </and>
+      </constraint>
+    </project-facet-version>
+  </extension>
+
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.presets">
+     <static-preset
+           id="com.google.cloud.tools.eclipse.appengine.flexible.war.preset">
+        <label>%appengine.flexible.war.preset</label>
+        <facet
+              id="com.google.cloud.tools.eclipse.appengine.facets.flex"
+              version="1">
+        </facet>
+        <facet
+              id="java"
+              version="1.8">
+        </facet>
+        <facet
+              id="jst.web"
+              version="3.1">
+        </facet>
+     </static-preset>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <action
+        id="com.google.cloud.tools.eclipse.appengine.facets.flex.install.action"
+        facet="com.google.cloud.tools.eclipse.appengine.facets.flex"
+        type="INSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetInstallDelegate"/>
+    </action>
+    <action
+        id="com.google.cloud.tools.eclipse.appengine.facets.flex.uninstall.action"
+        facet="com.google.cloud.tools.eclipse.appengine.facets.flex"
+        type="UNINSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetUninstallDelegate"/>
+    </action>
+  </extension>
+
+  <extension point="org.eclipse.core.expressions.definitions">
+    <definition id="com.google.cloud.tools.eclipse.appengine.isFlexWarProject">
+      <adapt type="org.eclipse.core.resources.IProject">
+        <test
+            property="org.eclipse.wst.common.project.facet.core.projectFacet"
+            value="com.google.cloud.tools.eclipse.appengine.facets.flex" />
+      </adapt>
+    </definition>
+  </extension>
+  <!-- end App Engine flex WAR facet -->
+
+  <!-- begin App Engine flex JAR facet -->
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <project-facet id="com.google.cloud.tools.eclipse.appengine.facets.flex.jar">
+      <label>%flexJarFacetName</label>
+      <description>%flexJarFacetDescription</description>
+    </project-facet>
+    <project-facet-version facet="com.google.cloud.tools.eclipse.appengine.facets.flex.jar" version="1">
+      <constraint>
+        <and>
+          <conflicts facet="com.google.cloud.tools.eclipse.appengine.facets.standard"/>
+          <conflicts facet="com.google.cloud.tools.eclipse.appengine.facets.flex"/>
+          <conflicts facet="jst.web"/>
+          <requires facet="java"
+                    version="1.7,1.8">
+          </requires>
+        </and>
+      </constraint>
+    </project-facet-version>
+  </extension>
+
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.presets">
+     <static-preset
+           id="com.google.cloud.tools.eclipse.appengine.flexible.jar.preset">
+        <label>%appengine.flexible.jar.preset</label>
+        <facet
+              id="com.google.cloud.tools.eclipse.appengine.facets.flex.jar"
+              version="1">
+        </facet>
+        <facet
+              id="java"
+              version="1.8">
+        </facet>
+     </static-preset>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <action
+        id="com.google.cloud.tools.eclipse.appengine.facets.flex.jar.install.action"
+        facet="com.google.cloud.tools.eclipse.appengine.facets.flex.jar"
+        type="INSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetInstallDelegate"/>
+    </action>
+    <action
+        id="com.google.cloud.tools.eclipse.appengine.facets.flex.jar.uninstall.action"
+        facet="com.google.cloud.tools.eclipse.appengine.facets.flex.jar"
+        type="UNINSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetUninstallDelegate"/>
+    </action>
+  </extension>
+
+  <extension point="org.eclipse.core.expressions.definitions">
+    <definition id="com.google.cloud.tools.eclipse.appengine.isFlexJarMavenProject">
+      <adapt type="org.eclipse.core.resources.IProject">
+        <and>
+          <test
+              property="org.eclipse.wst.common.project.facet.core.projectFacet"
+              value="com.google.cloud.tools.eclipse.appengine.facets.flex.jar" />
+          <test
+              property="org.eclipse.core.resources.projectNature"
+              value="org.eclipse.m2e.core.maven2Nature" />
+        </and>
+      </adapt>
+    </definition>
+  </extension>
+  <!-- end App Engine flex JAR facet -->
+
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.detectors">
+     <detector
+           class="com.google.cloud.tools.eclipse.appengine.facets.AppEngineStandardJre7ProjectFacetDetector">
+     </detector>
+  </extension>
+  
+  <!-- 
+    cannot use com.google.cloud.tools.eclipse.appengine.isStandardProject for the trigger
+    https://github.com/GoogleCloudPlatform/google-cloud-eclipse/issues/3089
+  -->
+  <extension
+        point="org.eclipse.ui.navigator.navigatorContent">
+     <navigatorContent
+           activeByDefault="true"
+           appearsBefore="org.eclipse.jst.jee.ui.web"
+           contentProvider="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.AppEngineContentProvider"
+           icon="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/obj16/appengine.png"
+           id="com.google.cloud.tools.eclipse.appengine.navigator"
+           labelProvider="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.AppEngineLabelProvider"
+           name="%appengineNavigatorContentProvider"
+           priority="high">
+        <triggerPoints>
+           <and>
+              <instanceof
+                    value="org.eclipse.core.resources.IProject">
+              </instanceof>
+              <test
+                    property="org.eclipse.wst.common.project.facet.core.projectFacet"
+                    value="com.google.cloud.tools.eclipse.appengine.facets.standard">
+              </test>
+           </and>
+        </triggerPoints>
+        <possibleChildren>
+           <instanceof
+                 value="org.eclipse.core.resources.IProject">
+           </instanceof>
+        </possibleChildren>
+        <actionProvider
+              class="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.AppEngineActionProvider"
+              id="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.actions">
+           <enablement>
+              <or>
+                 <instanceof
+                       value="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.model.AppEngineResourceElement">
+                 </instanceof>
+                 <instanceof
+                       value="com.google.cloud.tools.eclipse.appengine.facets.ui.navigator.model.AppEngineStandardProjectElement">
+                 </instanceof>
+              </or>
+           </enablement>
+        </actionProvider>
+     </navigatorContent>
+  </extension>
+  <extension
+        point="org.eclipse.ui.navigator.viewer">
+     <viewerContentBinding
+           viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+        <includes>
+           <contentExtension pattern="com.google.cloud.tools.eclipse.appengine.navigator"/>
+        </includes>
+     </viewerContentBinding>
+  </extension>
+</plugin>
