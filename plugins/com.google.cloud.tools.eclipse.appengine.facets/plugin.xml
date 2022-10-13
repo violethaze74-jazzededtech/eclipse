@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   
+   <extension point="org.eclipse.wst.common.project.facet.core.facets">        
+    <project-facet id="com.google.cloud.tools.eclipse.appengine.facets.standard">
+       <label>%standardFacetName</label>
+       <description>%standardFacetDescription</description>
+    </project-facet>
+    <project-facet-version facet="com.google.cloud.tools.eclipse.appengine.facets.standard" version="1">
+       <constraint>
+          <and>
+            <requires facet="jst.web" version="2.5"/>
+            <requires facet="java" version="1.7"/>
+          </and>
+        </constraint>
+    </project-facet-version>
+  </extension>
+  
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.standard.install.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+      type="INSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.StandardFacetInstallDelegate"/>
+    </action>
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.standard.uninstall.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.standard"
+      type="UNINSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.StandardFacetUninstallDelegate"/>
+    </action>
+  </extension>
+  
+  <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
+    <supported>
+      <runtime-component any="true" />
+      <facet id="com.google.cloud.tools.eclipse.appengine.facets.standard" />
+    </supported>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.listeners">
+    <listener
+      class="com.google.cloud.tools.eclipse.appengine.facets.AppEngineStandardRuntimeChangeListener"
+      eventTypes="PRIMARY_RUNTIME_CHANGED">
+    </listener>
+  </extension>
+
+  <!-- Temporarily disable flex facet -->
+  <!--
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.facets">
+     <project-facet
+           id="com.google.cloud.tools.eclipse.appengine.facets.flex">
+        <label>%flexFacetName</label>
+        <description>%flexFacetDescription</description>
+     </project-facet>
+     <project-facet-version
+           facet="com.google.cloud.tools.eclipse.appengine.facets.flex"
+           version="1">
+        <constraint>
+           <conflicts facet="com.google.cloud.tools.eclipse.appengine.facets.standard"/>
+        </constraint>
+     </project-facet-version>
+  </extension>
+  -->
+
+  <extension point="org.eclipse.wst.common.project.facet.core.facets">
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.flex.install.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.flex"
+      type="INSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetInstallDelegate"/>
+    </action>
+    <action
+      id="com.google.cloud.tools.eclipse.appengine.facets.flex.uninstall.action"
+      facet="com.google.cloud.tools.eclipse.appengine.facets.flex"
+      type="UNINSTALL">
+      <delegate class="com.google.cloud.tools.eclipse.appengine.facets.FlexFacetUninstallDelegate"/>
+    </action>
+  </extension>
+
+  <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
+    <supported>
+      <runtime-component any="true" />
+      <facet id="com.google.cloud.tools.eclipse.appengine.facets.flex" />
+    </supported>
+  </extension>
+
+</plugin>
