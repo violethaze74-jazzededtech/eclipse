@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="org.eclipse.ui.newWizards">
+     <wizard
+            id="com.google.cloud.tools.eclipse.appengine.newproject.AppEngineStandard"
+            name="%wizard.name"
+            class="com.google.cloud.tools.eclipse.appengine.newproject.StandardProjectWizard"
+            icon="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/gae-16x16.png"
+            project="true"
+            category="com.google.cloud.tools.eclipse.appengine.wizards">
+         <description>%wizard.description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+         <keywordReference id="com.google.cloud.tools.eclipse.appengine.ui.GCPKeyword"/>
+         <keywordReference id="com.google.cloud.tools.eclipse.appengine.ui.GAEKeyword"/>
+         <keywordReference id="com.google.cloud.tools.eclipse.appengine.ui.GoogleKeyword"/>
+         <keywordReference 
+             id="com.google.cloud.tools.eclipse.appengine.ui.AppEngineKeyword"/>
+         <keywordReference 
+             id="com.google.cloud.tools.eclipse.appengine.ui.AppSpaceEngineKeyword"/>
+    </wizard>
+    <category 
+        id="com.google.cloud.tools.eclipse.appengine.wizards" 
+        name="%gcp.category" />
+  </extension>
+  <extension
+        point="org.eclipse.help.contexts">
+     <contexts
+           file="helpContexts.xml">
+     </contexts>
+  </extension>
+
+</plugin>
