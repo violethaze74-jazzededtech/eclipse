@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.epp.logging.aeri.ide.servers">
+      <server
+            id="com.google.cloud.tools.eclipse.aeri.GoogleExceptionServerConnection"
+            name="Google Cloud Tools for Eclipse"
+            description="Google wishes to get notified about errors that occur from Google Cloud Tools for Eclipse."
+            class="com.google.cloud.tools.eclipse.aeri.GoogleExceptionServerConnection"
+            icon16="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/gcp-16x16.png"
+            icon32="platform:/plugin/com.google.cloud.tools.eclipse.appengine.ui/icons/gcp-32x32.png">
+         <link
+               href="https://www.google.com"
+               rel="provider"
+               title="Google Inc.">
+         </link>
+         <link
+               href="https://www.google.com/intl/en/policies/privacy/"
+               rel="privacy-policy"
+               title="Privacy Policy">
+         </link>
+         <link
+               href="https://www.google.com/intl/en/policies/terms/"
+               rel="terms-of-use"
+               title="Terms of Use">
+         </link>
+      </server>
+   </extension>
+</plugin>
