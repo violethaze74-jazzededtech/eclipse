@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright 2017 Google Inc. -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.google.cloud.tools.eclipse</groupId>
+    <artifactId>trunk</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../../</relativePath>
+  </parent>
+  <artifactId>com.google.cloud.tools.eclipse.appengine.libraries.test</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>eclipse-test-plugin</packaging>
+  
+  <dependencyManagement>
+    <dependencies>
+       <dependency>  <!-- wrong scope; not a bom -->
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-framework-bom</artifactId>
+         <version>4.0.2.RELEASE</version>
+         <type>pom</type>
+         <scope>provided</scope>
+      </dependency>   
+      <dependency> <!-- wrong type; not a bom -->
+        <groupId>com.covisint.core</groupId>
+        <artifactId>httpclient-bom</artifactId>
+        <version>4.3.2</version>
+        <type>jar</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency> <!-- This is a bom -->
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-bom</artifactId>
+        <version>0.42.0-alpha</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
